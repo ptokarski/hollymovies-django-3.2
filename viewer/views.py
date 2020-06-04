@@ -28,7 +28,7 @@ class MovieCreateView(FormView):
         return result
 
     def form_invalid(self, form):
-        LOGGER.info('User provided invalid data.')
+        LOGGER.warning('User provided invalid data.')
         return super().form_invalid(form)
 
 
