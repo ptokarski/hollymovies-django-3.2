@@ -2,11 +2,9 @@ import re
 from datetime import date
 
 from django.core.exceptions import ValidationError
-from django.forms import (
-    CharField, DateField, Form, IntegerField, ModelChoiceField, Textarea
-)
+from django.forms import CharField, DateField, IntegerField, ModelForm
 
-from viewer.models import Genre
+from viewer.models import Movie
 
 
 def capitalized_validator(value):
@@ -26,13 +24,15 @@ class PastMonthField(DateField):
         return date(year=result.year, month=result.month, day=1)
 
 
-class MovieForm(Form):
+class MovieForm(ModelForm):
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
     title = CharField(validators=[capitalized_validator])
-    genre = ModelChoiceField(queryset=Genre.objects)
     rating = IntegerField(min_value=1, max_value=10)
     released = PastMonthField()
-    description = CharField(widget=Textarea, required=False)
 
     def clean_description(self):
         # Force each sentence of the description to be capitalized.
