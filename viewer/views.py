@@ -1,6 +1,12 @@
-from django.views.generic import ListView
+from django.views.generic import FormView, ListView
 
+from viewer.forms import MovieForm
 from viewer.models import Movie
+
+
+class MovieCreateView(FormView):
+    template_name = 'form.html'
+    form_class = MovieForm
 
 
 class MoviesView(ListView):
