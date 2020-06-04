@@ -1,6 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def hello(request, s0):
     s1 = request.GET['s1']
-    return HttpResponse(f'Hello, {s0} and {s1} world!')
+    return render(
+        request, template_name='hello.html',
+        context={'adjectives': [s0, s1, 'beautiful', 'wonderful']}
+    )
