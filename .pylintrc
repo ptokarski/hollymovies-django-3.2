@@ -1,0 +1,23 @@
+[MESSAGES CONTROL]
+disable=
+  # convention
+  bad-continuation,  # does not accept some harmless and quite clear formatting in our style
+  missing-module-docstring,  # we generally don't need to document obvious Django-built-in components to override
+  missing-function-docstring,
+  missing-class-docstring,
+  # refactor
+  too-few-public-methods,  # Django style encourage us to build classes only to override single field for configuration
+  too-many-ancestors,  # Django style encourage us to build classes based on multiple inheritance
+  duplicate-code,  # its a buggy feature
+  # warning
+  modelform-uses-exclude,  # rather pointless warning
+  fixme,  # we want to enable FIXME annotations in code-base
+
+[SIMILARITIES]
+ignore-imports=yes
+
+[FORMAT]
+max-line-length=80
+
+[MASTER]
+load-plugins=pylint_django,pylint_django.checkers.db_performance
