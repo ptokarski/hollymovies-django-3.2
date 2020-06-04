@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
+from viewer.models import Movie
 
-def hello(request, s0):
-    s1 = request.GET['s1']
+
+def movies(request):
     return render(
-        request, template_name='hello.html',
-        context={'adjectives': [s0, s1, 'beautiful', 'wonderful']}
+        request, template_name='movies.html',
+        context={'movies': Movie.objects.all()}
     )
