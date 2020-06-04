@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Welcome to HollyMovies!</h1>
+    {% for adjective in adjectives %}
+      {% if adjective != 'cruel' %}
+        <p>This is a {{ adjective }} world...</p>
+      {% endif %}
+    {% endfor %}
+  </body>
+</html>
