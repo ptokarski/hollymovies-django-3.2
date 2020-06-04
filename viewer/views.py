@@ -1,7 +1,7 @@
 from logging import getLogger
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from viewer.forms import MovieForm
 from viewer.models import Movie
@@ -13,10 +13,22 @@ class MovieCreateView(CreateView):
 
     template_name = 'form.html'
     form_class = MovieForm
-    success_url = reverse_lazy('movie_create')
+    success_url = reverse_lazy('index')
 
     def form_invalid(self, form):
-        LOGGER.warning('User provided invalid data.')
+        LOGGER.warning('User provided invalid data while creating a movie.')
+        return super().form_invalid(form)
+
+
+class MovieUpdateView(UpdateView):
+
+    template_name = 'form.html'
+    model = Movie
+    form_class = MovieForm
+    success_url = reverse_lazy('index')
+
+    def form_invalid(self, form):
+        LOGGER.warning('User provided invalid data while updating a movie.')
         return super().form_invalid(form)
 
 
