@@ -1,7 +1,7 @@
 from logging import getLogger
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from viewer.forms import MovieForm
 from viewer.models import Movie
@@ -30,6 +30,12 @@ class MovieUpdateView(UpdateView):
     def form_invalid(self, form):
         LOGGER.warning('User provided invalid data while updating a movie.')
         return super().form_invalid(form)
+
+
+class MovieDeleteView(DeleteView):
+    template_name = 'movie_confirm_delete.html'
+    model = Movie
+    success_url = reverse_lazy('index')
 
 
 class MoviesView(ListView):
