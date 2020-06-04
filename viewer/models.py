@@ -18,7 +18,7 @@ class Movie(Model):
     genre = ForeignKey(Genre, on_delete=DO_NOTHING)
     rating = IntegerField()
     released = DateField()
-    description = TextField()
+    description = TextField(null=True)
     created = DateTimeField(auto_now_add=True)
 
     def __str__(self):
