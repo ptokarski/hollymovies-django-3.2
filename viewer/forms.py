@@ -38,8 +38,7 @@ class MovieForm(ModelForm):
         # Force each sentence of the description to be capitalized.
         initial = self.cleaned_data['description']
         sentences = re.sub(r'\s*\.\s*', '.', initial).split('.')
-        cleaned = '. '.join(sentence.capitalize() for sentence in sentences)
-        self.cleaned_data['description'] = cleaned
+        return '. '.join(sentence.capitalize() for sentence in sentences)
 
     def clean(self):
         result = super().clean()
