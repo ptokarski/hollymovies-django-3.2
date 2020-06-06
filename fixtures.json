@@ -59,7 +59,7 @@
     "model": "viewer.genre",
     "pk": 9,
     "fields": {
-      "name": "commedy"
+      "name": "Comedy"
     }
   },
   {
