@@ -42,7 +42,7 @@ class MovieForm(ModelForm):
 
     def clean(self):
         result = super().clean()
-        if result['genre'].name == 'commedy' and result['rating'] > 5:
+        if result['genre'].name == 'Comedy' and result['rating'] > 5:
             raise ValidationError(
                 "Commedies aren't so good to be rated over 5."
             )
