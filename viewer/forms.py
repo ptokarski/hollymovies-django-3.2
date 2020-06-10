@@ -1,6 +1,8 @@
 import re
 from datetime import date
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Layout, Row, Submit
 from django.core.exceptions import ValidationError
 from django.forms import CharField, DateField, IntegerField, ModelForm
 
@@ -28,8 +30,13 @@ class MovieForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'title',
+            Row(Column('genre'), Column('rating'), Column('released')),
+            'description',
+            Submit('submit', 'Submit')
+        )
 
     class Meta:
         model = Movie
