@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% load movie_extras %}
+
 {% block content %}
   <ul>
     {% for movie in object_list %}
       <li>
-        {{ movie.title }} ({{ movie.released.year }})
+        {% movie_format movie short=True %}
         <a href="{% url 'viewer:movie_detail' movie.pk %}">detail</a> /
         <a href="{% url 'viewer:movie_update' movie.pk %}">update</a> /
         <a href="{% url 'viewer:movie_delete' movie.pk %}">delete</a>
