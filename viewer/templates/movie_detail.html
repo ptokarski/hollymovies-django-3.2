@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
+{% load movie_extras %}
+
 {% block content %}
-  <p><strong>Title:</strong> {{ object.title }}</p>
-  <p><strong>Released:</strong> {{ object.released }}</p>
-  <p><strong>Genre:</strong> {{ object.genre }}</p>
-  <p><strong>Rating:</strong> {{ object.rating }}</p>
-  <p><strong>Description:</strong> {{ object.description }}</p>
+  {{ movie|attr_as_p:'title' }}
+  {{ movie|attr_as_p:'released' }}
+  {{ movie|attr_as_p:'genre' }}
+  {{ movie|attr_as_p:'rating' }}
+  {{ movie|attr_as_p:'description' }}
 {% endblock %}
