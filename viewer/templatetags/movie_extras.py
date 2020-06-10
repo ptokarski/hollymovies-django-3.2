@@ -13,7 +13,7 @@ def movie_format(movie, short=False):
 
 
 @register.filter
-def attr_as_p(obj, attrname=False):
+def attr_as_p(obj, attrname):
     label = escape(attrname.capitalize())
     value = escape(getattr(obj, attrname))
     return SafeString(f'<p><strong>{label}:</strong> {value}</p>')
