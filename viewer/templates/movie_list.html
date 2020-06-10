@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <ul>
+    {% for movie in object_list %}
+      <li>
+        {{ movie.title }} ({{ movie.released.year }})
+        <a href="{% url 'viewer:movie_detail' movie.pk %}">detail</a> /
+        <a href="{% url 'viewer:movie_update' movie.pk %}">update</a> /
+        <a href="{% url 'viewer:movie_delete' movie.pk %}">delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

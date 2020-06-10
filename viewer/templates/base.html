@@ -23,6 +23,15 @@
             <a class="nav-item nav-link active" href="{% url 'index' %}">
               Home
             </a>
+            <div class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
+                Movies
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'viewer:movie_list' %}">List</a>
+                <a class="dropdown-item" href="{% url 'viewer:movie_create' %}">Create</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
