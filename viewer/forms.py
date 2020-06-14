@@ -27,13 +27,6 @@ class PastMonthField(DateField):
         return date(year=result.year, month=result.month, day=1)
 
 
-class SubmittableAuthenticationForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(*self.fields, Submit('submit', 'Submit'))
-
-
 class MovieForm(ModelForm):
 
     def __init__(self, *args, **kwargs):

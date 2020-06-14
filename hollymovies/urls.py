@@ -16,15 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from hollymovies.views import IndexView
 from viewer.models import Genre, Movie
-from viewer.views import IndexView, SubmittableLoginView
 
 admin.site.register(Genre)
 admin.site.register(Movie)
 
 urlpatterns = [
-    path('accounts/login/', SubmittableLoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
     path('viewer/', include('viewer.urls', namespace='viewer'))
 ]
