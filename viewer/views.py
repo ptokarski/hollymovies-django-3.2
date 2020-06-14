@@ -1,15 +1,21 @@
 from logging import getLogger
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
 
-from viewer.forms import MovieForm
+from viewer.forms import MovieForm, SubmittableAuthenticationForm
 from viewer.models import Movie
 
 LOGGER = getLogger()
+
+
+class SubmittableLoginView(LoginView):
+    form_class = SubmittableAuthenticationForm
+    template_name = 'form.html'
 
 
 class MovieListView(ListView):
