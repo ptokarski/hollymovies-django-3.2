@@ -1,6 +1,8 @@
 from logging import getLogger
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin
+)
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -22,20 +24,23 @@ class MovieDetailView(LoginRequiredMixin, DetailView):
     model = Movie
 
 
-class MovieCreateView(LoginRequiredMixin, CreateView):
+class MovieCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = MovieForm
     success_url = reverse_lazy('viewer:movie_list')
+    permission_required = 'viewer.add_movie'
 
 
-class MovieUpdateView(LoginRequiredMixin, UpdateView):
+class MovieUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'form.html'
     model = Movie
     form_class = MovieForm
     success_url = reverse_lazy('viewer:movie_list')
+    permission_required = 'viewer.change_movie'
 
 
-class MovieDeleteView(LoginRequiredMixin, DeleteView):
+class MovieDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'movie_confirm_delete.html'
     model = Movie
     success_url = reverse_lazy('viewer:movie_list')
+    permission_required = 'viewer.delete_movie'
