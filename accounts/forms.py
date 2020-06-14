@@ -3,7 +3,10 @@ from crispy_forms.layout import Layout, Submit
 from django.contrib.auth.forms import (
     AuthenticationForm, PasswordChangeForm, UserCreationForm
 )
-from django.forms import Form
+from django.db.transaction import atomic
+from django.forms import CharField, Form, Textarea
+
+from accounts.models import Profile
 
 
 class SubmittableForm(Form):
@@ -26,6 +29,16 @@ class SignUpForm(SubmittableForm, UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ['username', 'first_name']
 
+    biography = CharField(
+        label='Tell us your story with movies', widget=Textarea, min_length=40
+    )
+
+    @atomic
     def save(self, commit=True):
         self.instance.is_active = False
-        return super().save(commit)
+        result = super().save(commit)
+        biography = self.cleaned_data['biography']
+        profile = Profile(biography=biography, user=result)
+        if commit:
+            profile.save()
+        return result
