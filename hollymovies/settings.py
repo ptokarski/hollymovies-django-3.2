@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'crispy_forms',
+    'accounts',
     'viewer'
 ]
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'hollymovies.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join('hollymovies', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
