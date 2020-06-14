@@ -1,7 +1,9 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from accounts.views import SubmittableLoginView, SubmittablePasswordChangeView
+from accounts.views import (
+    SignUpView, SubmittableLoginView, SubmittablePasswordChangeView
+)
 
 app_name = 'accounts'
 urlpatterns = [
@@ -10,5 +12,6 @@ urlpatterns = [
     path(
         'password-change/', SubmittablePasswordChangeView.as_view(),
         name='password_change'
-    )
+    ),
+    path('sign-up/', SignUpView.as_view(), name='sign_up')
 ]
