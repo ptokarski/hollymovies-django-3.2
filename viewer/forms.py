@@ -3,6 +3,7 @@ from datetime import date
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.forms import CharField, DateField, IntegerField, ModelForm
 
@@ -24,6 +25,13 @@ class PastMonthField(DateField):
     def clean(self, value):
         result = super().clean(value)
         return date(year=result.year, month=result.month, day=1)
+
+
+class SubmittableAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(*self.fields, Submit('submit', 'Submit'))
 
 
 class MovieForm(ModelForm):
