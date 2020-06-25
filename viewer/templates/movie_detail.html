@@ -1,25 +1,11 @@
 {% extends "base.html" %}
 
-{% load static %}
 {% load movie_extras %}
 
-{% block styles %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/movie_detail.css' %}" />
-{% endblock %}
-
 {% block content %}
-  <div class="row">
-    {% if movie.poster %}
-      <div class="col-4">
-        <img src="{{ movie.poster.url }}" class="max-300x450"/>
-      </div>
-    {% endif %}
-    <div class="col">
-      {{ movie|attr_as_p:'released' }}
-      {{ movie|attr_as_p:'genre' }}
-      {{ movie|attr_as_p:'rating' }}
-      {{ movie|attr_as_p:'description' }}
-    </div>
-  </div>
+  {{ movie|attr_as_p:'title' }}
+  {{ movie|attr_as_p:'released' }}
+  {{ movie|attr_as_p:'genre' }}
+  {{ movie|attr_as_p:'rating' }}
+  {{ movie|attr_as_p:'description' }}
 {% endblock %}
