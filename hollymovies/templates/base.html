@@ -60,6 +60,9 @@
     </nav>
     <div class="container">
       <div class="jumbotron">
+        {% block title %}
+          {% if title %}<h1>{{ title }}</h1>{% endif %}
+        {% endblock %}
         {% block content %}{% endblock %}
       </div>
     </div>
