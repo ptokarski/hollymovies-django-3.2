@@ -1,0 +1,5 @@
+.max-200x400 {
+  display: block;
+  max-width: 300px;
+  max-height: 450px;
+}
