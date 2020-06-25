@@ -1,12 +1,31 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% load movie_extras %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/movie_list.js' %}"></script>
+{% endblock %}
+
+{% block styles %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/movie_list.css' %}" />
+{% endblock %}
 
 {% block content %}
   <ul>
     {% for movie in object_list %}
       <li>
-        {% movie_format movie short=True %}
+        {% if movie.poster %}
+          <span class="cursor-default show-image" data-img="{{ movie.poster.url }}">
+            {% movie_format movie short=True %}
+          </span>
+        {% else %}
+          <span class="cursor-default">
+            {% movie_format movie short=True %}
+          </span>
+        {% endif %}
         <a href="{% url 'viewer:movie_detail' movie.pk %}">detail</a> /
         <a href="{% url 'viewer:movie_update' movie.pk %}">update</a> /
         <a href="{% url 'viewer:movie_delete' movie.pk %}">delete</a>
