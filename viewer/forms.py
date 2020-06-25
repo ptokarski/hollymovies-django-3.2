@@ -34,7 +34,7 @@ class MovieForm(ModelForm):
         self.helper.layout = Layout(
             'title',
             Row(Column('genre'), Column('rating'), Column('released')),
-            'description',
+            'description', 'poster',
             Submit('submit', 'Submit')
         )
 
