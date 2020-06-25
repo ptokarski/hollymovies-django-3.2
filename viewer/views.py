@@ -1,5 +1,6 @@
 from logging import getLogger
 
+from django.contrib import messages
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 )
@@ -10,7 +11,7 @@ from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
 
-from hollymovies.mixins import TitleMixin
+from hollymovies.mixins import SuccessMessagedFormMixin, TitleMixin
 from viewer.forms import MovieForm
 from viewer.models import Movie
 
@@ -37,16 +38,24 @@ class MovieDetailView(LoginRequiredMixin, TitleMixin, DetailView):
         return self.object.title
 
 
-class MovieCreateView(PermissionRequiredMixin, TitleMixin, CreateView):
+class MovieCreateView(
+    PermissionRequiredMixin, TitleMixin, SuccessMessagedFormMixin, CreateView
+):
+
     title = 'Add Movie'
     template_name = 'form.html'
     form_class = MovieForm
     success_url = reverse_lazy('viewer:movie_list')
     permission_required = 'viewer.add_movie'
 
+    def get_success_message(self):
+        safe_title = escape(self.object.title)
+        return SafeString(f'Movie <strong>{safe_title}</strong> added!')
+
 
 class MovieUpdateView(
-    StaffRequiredMixin, PermissionRequiredMixin, TitleMixin, UpdateView
+    StaffRequiredMixin, PermissionRequiredMixin,
+    TitleMixin, SuccessMessagedFormMixin, UpdateView
 ):
 
     template_name = 'form.html'
@@ -58,6 +67,10 @@ class MovieUpdateView(
     def get_title(self):
         safe_title = escape(self.object.title)
         return SafeString(f'Update <em>{safe_title}</em>')
+
+    def get_success_message(self):
+        safe_title = escape(self.object.title)
+        return SafeString(f'Movie <strong>{safe_title}</strong> updated!')
 
 
 class MovieDeleteView(
@@ -75,3 +88,10 @@ class MovieDeleteView(
     def get_title(self):
         safe_title = escape(self.object.title)
         return SafeString(f'Delete <em>{safe_title}</em>')
+
+    def post(self, request, *args, **kwargs):
+        result = super().post(request, *args, **kwargs)
+        safe_title = escape(self.object.title)
+        message = SafeString(f'Movie <strong>{safe_title}</strong> removed.')
+        messages.success(request, message)
+        return result
