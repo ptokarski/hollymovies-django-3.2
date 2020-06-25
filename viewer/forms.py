@@ -3,7 +3,6 @@ from datetime import date
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Row, Submit
-from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.forms import CharField, DateField, IntegerField, ModelForm
 
