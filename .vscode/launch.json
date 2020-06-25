@@ -5,19 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Runserver",
+            "name": "Python: Django",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
-            "args": ["runserver", "--noreload"],
-            "django": true
-        },
-        {
-            "name": "Test",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
-            "args": ["test", "-v", "3"],
+            "args": [
+                "runserver",
+                "--noreload"
+            ],
             "django": true
         }
     ]
