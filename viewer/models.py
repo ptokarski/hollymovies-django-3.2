@@ -1,6 +1,6 @@
 from django.db.models import (
-    DO_NOTHING, CharField, DateField, DateTimeField, ForeignKey, IntegerField,
-    Model, TextField
+    DO_NOTHING, CharField, DateField, DateTimeField, ForeignKey, ImageField,
+    IntegerField, Model, TextField
 )
 
 
@@ -19,6 +19,7 @@ class Movie(Model):
     rating = IntegerField()
     released = DateField()
     description = TextField(null=True, blank=True)
+    poster = ImageField(null=True, blank=True)
     created = DateTimeField(auto_now_add=True)
 
     def __str__(self):
