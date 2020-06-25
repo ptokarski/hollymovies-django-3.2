@@ -9,7 +9,7 @@ class TitleMixin(ContextMixin):
         return self.title
 
     def get_context_data(self, **kwargs):
-        result = super().get_context_data()
+        result = super().get_context_data(**kwargs)
         title = self.get_title()
         if title is not None:
             result['title'] = title
