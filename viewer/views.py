@@ -27,6 +27,7 @@ class MovieListView(TitleMixin, ListView):
     title = 'Movie Dashboard'
     template_name = 'movie_list.html'
     model = Movie
+    paginate_by = 20
 
 
 class MovieDetailView(LoginRequiredMixin, TitleMixin, DetailView):
