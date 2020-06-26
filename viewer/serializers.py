@@ -14,9 +14,18 @@ class GenreSerializer(ModelSerializer):
         exclude = []
 
 
-class MovieSerializer(ModelSerializer):
+class MovieShortSerializer(ModelSerializer):
 
     url = HyperlinkedIdentityField(view_name='viewer:movie-detail')
+    genre = GenreSerializer()
+
+    class Meta:
+        model = Movie
+        fields = ['url', 'title', 'genre', 'released', 'rating']
+
+
+class MovieSerializer(ModelSerializer):
+
     genre = HyperlinkedRelatedField(
         queryset=Genre.objects, view_name='viewer:genre-detail'
     )
