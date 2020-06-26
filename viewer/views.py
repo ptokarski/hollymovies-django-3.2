@@ -10,6 +10,7 @@ from django.utils.safestring import SafeString
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 
 from hollymovies.mixins import SuccessMessagedFormMixin, TitleMixin
@@ -29,8 +30,13 @@ class GenreViewSet(ModelViewSet):
 
 class MovieViewSet(ModelViewSet):
 
-    queryset = Movie.objects
+    queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+
+    class pagination_class(PageNumberPagination):
+        page_query_param = 'p'
+        page_size = 10
+        page_size_query_param = 'per_page'
 
     def get_serializer_class(self):
         if self.action == 'list':
