@@ -35,7 +35,7 @@ class MovieViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return MovieShortSerializer
-        return self.serializer_class
+        return super().get_serializer_class()
 
 
 class StaffRequiredMixin(UserPassesTestMixin):
