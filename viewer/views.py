@@ -11,7 +11,9 @@ from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework_xml.renderers import XMLRenderer
 
 from hollymovies.mixins import SuccessMessagedFormMixin, TitleMixin
 from viewer.forms import MovieForm
@@ -26,6 +28,7 @@ LOGGER = getLogger()
 class GenreViewSet(ModelViewSet):
     queryset = Genre.objects
     serializer_class = GenreSerializer
+    renderer_classes = APIView.renderer_classes + [XMLRenderer]
 
 
 class MovieViewSet(ModelViewSet):
