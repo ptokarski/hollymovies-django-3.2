@@ -2,11 +2,12 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from viewer.views import (
-    MovieCreateView, MovieDeleteView, MovieDetailView, MovieListView,
-    MovieUpdateView
+    GenreViewSet, MovieCreateView, MovieDeleteView, MovieDetailView,
+    MovieListView, MovieUpdateView
 )
 
 router = DefaultRouter()
+router.register('genre', GenreViewSet)
 
 app_name = 'viewer'
 urlpatterns = [

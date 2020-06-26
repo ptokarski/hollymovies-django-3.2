@@ -10,12 +10,19 @@ from django.utils.safestring import SafeString
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
+from rest_framework.viewsets import ModelViewSet
 
 from hollymovies.mixins import SuccessMessagedFormMixin, TitleMixin
 from viewer.forms import MovieForm
-from viewer.models import Movie
+from viewer.models import Genre, Movie
+from viewer.serializers import GenreSerializer
 
 LOGGER = getLogger()
+
+
+class GenreViewSet(ModelViewSet):
+    queryset = Genre.objects
+    serializer_class = GenreSerializer
 
 
 class StaffRequiredMixin(UserPassesTestMixin):
