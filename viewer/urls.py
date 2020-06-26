@@ -3,11 +3,12 @@ from rest_framework.routers import DefaultRouter
 
 from viewer.views import (
     GenreViewSet, MovieCreateView, MovieDeleteView, MovieDetailView,
-    MovieListView, MovieUpdateView
+    MovieListView, MovieUpdateView, MovieViewSet
 )
 
 router = DefaultRouter()
 router.register('genre', GenreViewSet)
+router.register('movie', MovieViewSet)
 
 app_name = 'viewer'
 urlpatterns = [
