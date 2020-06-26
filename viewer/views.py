@@ -15,7 +15,7 @@ from rest_framework.viewsets import ModelViewSet
 from hollymovies.mixins import SuccessMessagedFormMixin, TitleMixin
 from viewer.forms import MovieForm
 from viewer.models import Genre, Movie
-from viewer.serializers import GenreSerializer
+from viewer.serializers import GenreSerializer, MovieSerializer
 
 LOGGER = getLogger()
 
@@ -23,6 +23,11 @@ LOGGER = getLogger()
 class GenreViewSet(ModelViewSet):
     queryset = Genre.objects
     serializer_class = GenreSerializer
+
+
+class MovieViewSet(ModelViewSet):
+    queryset = Movie.objects
+    serializer_class = MovieSerializer
 
 
 class StaffRequiredMixin(UserPassesTestMixin):
