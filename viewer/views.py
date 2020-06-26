@@ -10,7 +10,9 @@ from django.utils.safestring import SafeString
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_xml.renderers import XMLRenderer
@@ -29,12 +31,16 @@ class GenreViewSet(ModelViewSet):
     queryset = Genre.objects
     serializer_class = GenreSerializer
     renderer_classes = APIView.renderer_classes + [XMLRenderer]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class MovieViewSet(ModelViewSet):
 
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     class pagination_class(PageNumberPagination):
         page_query_param = 'p'
