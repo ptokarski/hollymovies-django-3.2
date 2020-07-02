@@ -1,0 +1,22 @@
+FROM python:3.8
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+ENV SRC=/hollymovies/
+RUN mkdir ${SRC}
+WORKDIR ${SRC}
+
+ADD ./requirements.txt ./requirements.txt
+RUN python -m pip install -r requirements.txt
+
+ADD ./manage.py ./manage.py
+ADD ./hollymovies/ ./hollymovies/
+ADD ./accounts/ ./accounts/
+ADD ./viewer/ ./viewer/
+ADD ./static/ ./static/
+
+ENV PYTHONPATH=${SRC}
+
+RUN python manage.py migrate
+CMD uwsgi --module hollymovies.wsgi --http 0.0.0.0:8000
