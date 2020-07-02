@@ -19,4 +19,5 @@ ADD ./static/ ./static/
 ENV PYTHONPATH=${SRC}
 
 RUN python manage.py migrate
-CMD uwsgi --module hollymovies.wsgi --http 0.0.0.0:8000
+RUN python manage.py collectstatic --no-input
+CMD uwsgi --module hollymovies.wsgi --http 0.0.0.0:8000 --static-map /static=static-prod
