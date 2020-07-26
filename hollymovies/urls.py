@@ -29,5 +29,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('viewer/', include('viewer.urls', namespace='viewer')),
+    path('api-auth/', include('rest_framework.urls')),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
