@@ -19,10 +19,11 @@ from django.contrib import admin
 from django.urls import include, path
 
 from hollymovies.views import IndexView
+from viewer.admin import MovieAdmin
 from viewer.models import Genre, Movie
 
 admin.site.register(Genre)
-admin.site.register(Movie)
+admin.site.register(Movie, MovieAdmin)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
