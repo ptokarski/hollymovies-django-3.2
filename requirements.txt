@@ -3,6 +3,6 @@ django-bootstrap4==1.1.1
 django-crispy-forms==1.9.1
 djangorestframework==3.11.0
 djangorestframework-xml==2.0.0
-Pillow==7.1.2
+Pillow==8.2.0
 psycopg2-binary==2.8.4
 uwsgi==2.0.18
